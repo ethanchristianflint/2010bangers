@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Strict iOS Safari & Mobile PWA Viewport Settings -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  
+  <!-- Strict iOS PWA Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Undisputed Bangers">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0a0b10">
+
+  <!-- SEO & Social Meta Tags -->
+  <!-- SEO & Social Meta Tags -->
+  <title>Undisputed Bangers</title>
+  <meta name="description" content="A vibe-based 2010s song finder and player powered by the YouTube IFrame API. 164 undisputed anthems.">
+
+  <!-- Web App Manifest & App Icons -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="64x64" href="icons/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+
+  <!-- Modern Typography (Plus Jakarta Sans & Outfit) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=9">
+</head>
+<body>
+  <!-- Background Image & Atmospheric Layers -->
+  <div class="bg-image-layer" aria-hidden="true"></div>
+  <div class="bubbles-layer" aria-hidden="true">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
+
+  <!-- First-Click Audio Unlock Overlay -->
+  <div id="start-overlay" class="start-overlay" role="dialog" aria-modal="true" aria-labelledby="start-title">
+    <div class="overlay-backdrop"></div>
+    <div class="overlay-card">
+      <div class="overlay-icon-ring">
+        <svg class="pulse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+      </div>
+      <h1 id="start-title" class="overlay-title">Undisputed Bangers</h1>
+      <p class="overlay-subtitle">Tap below to unlock audio and tune your throwback frequency across 164 undisputed anthems.</p>
+      <button id="start-btn" class="btn-start" type="button">
+        <span>Start Vibe Check</span>
+        <svg viewBox="0 0 20 20" fill="currentColor" class="btn-arrow">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+      </button>
+      <div class="overlay-tip">
+        <span>💡 Best experienced on iOS Safari: Share &rarr; Add to Home Screen</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Application Wrapper -->
+  <div id="app-container" class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-content">
+        <div class="logo-group">
+          <span class="logo-jewel ruby" title="Energy Ruby"></span>
+          <span class="logo-jewel sapphire" title="Mood Sapphire"></span>
+          <span class="logo-jewel emerald" title="Dance Emerald"></span>
+        </div>
+        <h1 class="app-title">Undisputed Bangers</h1>
+        <span class="badge-era">2010s ANTHEMS</span>
+      </div>
+    </header>
+
+    <!-- Search & Quick Find -->
+    <div class="search-section">
+      <div class="search-input-wrapper">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+        </svg>
+        <input 
+          type="search" 
+          id="search-input" 
+          class="search-input" 
+          placeholder="Search 164 anthems by title or artist..." 
+          autocomplete="off"
+          aria-label="Search anthems"
+        >
+        <button id="search-clear" class="btn-clear hidden" type="button" aria-label="Clear search">✕</button>
+      </div>
+    </div>
+
+    <!-- One-Tap Vibe Presets -->
+    <div class="presets-section">
+      <div class="presets-header">
+        <span class="section-micro-label">VIBE PRESETS</span>
+        <button id="btn-reset-filters" class="btn-reset-text" type="button">Reset All</button>
+      </div>
+      <div class="presets-scroll" role="toolbar" aria-label="Vibe Presets">
+        <button class="preset-pill active" data-preset="all" type="button">All Vibes</button>
+        <button class="preset-pill fav-preset" data-preset="favorites" type="button">❤️ My Bangers <span id="fav-count-badge" class="badge-count">0</span></button>
+        <button class="preset-pill" data-preset="club" type="button">🔥 Club Bangers</button>
+        <button class="preset-pill" data-preset="euphoria" type="button">☀️ Euphoria</button>
+        <button class="preset-pill" data-preset="rnb" type="button">🌙 Late Night R&B</button>
+        <button class="preset-pill" data-preset="chill" type="button">🌊 Chill & Groove</button>
+      </div>
+    </div>
+
+    <!-- Era & Tempo Ribbons -->
+    <div class="ribbon-filters">
+      <div class="filter-row">
+        <span class="ribbon-label">Era:</span>
+        <div class="pill-group" id="year-filters">
+          <button class="filter-chip active" data-year="all" type="button">All</button>
+          <button class="filter-chip" data-year="2008" type="button">'08</button>
+          <button class="filter-chip" data-year="2009" type="button">'09</button>
+          <button class="filter-chip" data-year="2010" type="button">'10</button>
+          <button class="filter-chip" data-year="2011" type="button">'11</button>
+          <button class="filter-chip" data-year="2012" type="button">'12</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <span class="ribbon-label">BPM:</span>
+        <div class="pill-group" id="tempo-filters">
+          <button class="filter-chip active" data-tempo="all" type="button">Any</button>
+          <button class="filter-chip" data-tempo="chill" type="button">Chill &lt;100</button>
+          <button class="filter-chip" data-tempo="mid" type="button">Mid 100-120</button>
+          <button class="filter-chip" data-tempo="fast" type="button">Fast 120+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Control Panel: Sliders with live value feedback -->
+    <section class="control-panel" id="control-panel" aria-label="Vibe Filter Controls">
+      <div class="control-group" data-vibe="energy">
+        <div class="slider-header">
+          <label for="energy-slider" class="slider-label">
+            <span class="jewel-dot ruby"></span>
+            <span>Energy</span>
+          </label>
+          <span id="energy-val" class="slider-value">0%</span>
+        </div>
+        <input 
+          type="range" 
+          id="energy-slider" 
+          class="vibe-slider ruby-slider" 
+          min="0" 
+          max="100" 
+          value="0" 
+          step="1"
+          aria-label="Minimum Energy Filter"
+        >
+      </div>
+
+      <div class="control-group" data-vibe="valence">
+        <div class="slider-header">
+          <label for="valence-slider" class="slider-label">
+            <span class="jewel-dot sapphire"></span>
+            <span>Mood</span>
+          </label>
+          <span id="valence-val" class="slider-value">0%</span>
+        </div>
+        <input 
+          type="range" 
+          id="valence-slider" 
+          class="vibe-slider sapphire-slider" 
+          min="0" 
+          max="100" 
+          value="0" 
+          step="1"
+          aria-label="Minimum Mood Filter"
+        >
+      </div>
+
+      <div class="control-group" data-vibe="danceability">
+        <div class="slider-header">
+          <label for="danceability-slider" class="slider-label">
+            <span class="jewel-dot emerald"></span>
+            <span>Danceability</span>
+          </label>
+          <span id="danceability-val" class="slider-value">0%</span>
+        </div>
+        <input 
+          type="range" 
+          id="danceability-slider" 
+          class="vibe-slider emerald-slider" 
+          min="0" 
+          max="100" 
+          value="0" 
+          step="1"
+          aria-label="Minimum Danceability Filter"
+        >
+      </div>
+    </section>
+
+    <!-- Track Feed Section -->
+    <main class="feed-section">
+      <div class="feed-header">
+        <h2 class="feed-title">Matching Anthems</h2>
+        <span id="match-count" class="match-count">0 tracks found</span>
+      </div>
+      <div id="track-feed" class="track-feed" role="list">
+        <!-- Rendered dynamically via app.js -->
+      </div>
+    </main>
+
+    <!-- Persistent Bottom Audio Player -->
+    <footer class="persistent-player" id="persistent-player" role="region" aria-label="Persistent Audio Player">
+      <!-- Audio Scrubber & Timeline -->
+      <div class="player-timeline" id="player-timeline">
+        <div class="timeline-bar" id="timeline-bar">
+          <div class="timeline-progress" id="timeline-progress"></div>
+          <div class="timeline-thumb" id="timeline-thumb"></div>
+        </div>
+        <div class="timeline-time">
+          <span id="time-current">0:00</span>
+          <span id="time-duration">0:00</span>
+        </div>
+      </div>
+
+      <div class="player-main-row">
+        <div class="player-left">
+          <div class="track-artwork-mini" id="player-artwork">
+            <span class="equalizer-bars" id="equalizer-bars">
+              <i></i><i></i><i></i><i></i>
+            </span>
+          </div>
+          <div class="track-details">
+            <span id="current-title" class="track-title">Ready to Play</span>
+            <span id="current-artist" class="track-artist">Select an anthem above</span>
+          </div>
+        </div>
+        <div class="player-controls">
+          <button id="btn-shuffle" class="btn-player-action btn-shuffle" type="button" aria-label="Vibe Roulette: Pick random matching anthem" title="Vibe Roulette">
+            <svg class="control-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 3 21 3 21 8"></polyline>
+              <line x1="4" y1="20" x2="21" y2="3"></line>
+              <polyline points="21 16 21 21 16 21"></polyline>
+              <line x1="15" y1="15" x2="21" y2="21"></line>
+              <line x1="4" y1="4" x2="9" y2="9"></line>
+            </svg>
+          </button>
+          <button id="btn-prev" class="btn-player-action btn-prev" type="button" aria-label="Previous track" title="Previous Track">
+            <svg class="control-icon" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="19 20 9 12 19 4 19 20"></polygon>
+              <line x1="5" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></line>
+            </svg>
+          </button>
+          <button id="btn-play-pause" class="btn-player-action btn-play" type="button" aria-label="Play or pause track">
+            <svg id="icon-play" class="control-icon" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <svg id="icon-pause" class="control-icon hidden" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="4" width="4" height="16"></rect>
+              <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+          </button>
+          <button id="btn-next" class="btn-player-action btn-next" type="button" aria-label="Skip to next track" title="Next Track">
+            <svg class="control-icon" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 4 15 12 5 20 5 4"></polygon>
+              <line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></line>
+            </svg>
+          </button>
+          <button id="btn-volume" class="btn-player-action btn-volume" type="button" aria-label="Toggle mute" title="Mute / Unmute">
+            <svg id="icon-volume-on" class="control-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+            <svg id="icon-volume-mute" class="control-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Hidden YouTube IFrame Container (Strict 1px / Off-screen for iOS background audio simulation) -->
+  <div id="youtube-audio-host" class="youtube-audio-host" aria-hidden="true">
+    <div id="yt-player"></div>
+  </div>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then((reg) => console.log('[PWA] Service Worker registered:', reg.scope))
+          .catch((err) => console.warn('[PWA] Service Worker registration failed:', err));
+      });
+    }
+  </script>
+
+  <!-- Application Modules -->
+  <script src="data.js?v=9"></script>
+  <script src="youtube.js?v=9"></script>
+  <script src="app.js?v=9"></script>
+</body>
+</html>

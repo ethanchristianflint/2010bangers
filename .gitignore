@@ -1,0 +1,29 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# Editor & IDE Configs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Python Cache & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.pytest_cache/
+
+# Temporary Files & Scratch
+*.log
+*.tmp
+*.bak
+.tempmediaStorage/
+scratch/

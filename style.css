@@ -1,0 +1,1373 @@
+/* ==========================================================================
+   2010s Vibe Check - The Little Mermaid x Hello Kitty Girly Pop Theme
+   Enchanted Disney Under-The-Sea bioluminescence & Kawaii Y2K Pop Aesthetics
+   ========================================================================== */
+
+:root {
+  /* Color System: Mermaid Lagoon & Hello Kitty Palette */
+  --bg-primary: #090516;
+  --bg-secondary: #120b29;
+  --bg-card: rgba(22, 15, 48, 0.72);
+  --bg-card-hover: rgba(32, 22, 68, 0.85);
+  --bg-card-active: rgba(40, 26, 85, 0.95);
+  --bg-glass: rgba(14, 9, 34, 0.88);
+
+  /* The Little Mermaid & Kawaii Girly Pop Accents */
+  --kitty-pink: #ff75a0;
+  --kitty-pink-light: #ff9ebb;
+  --kitty-pink-glow: rgba(255, 117, 160, 0.45);
+  --kitty-gradient: linear-gradient(135deg, #ff75a0, #fd79a8);
+
+  --mermaid-aqua: #00f5d4;
+  --mermaid-aqua-light: #80ffea;
+  --mermaid-aqua-glow: rgba(0, 245, 212, 0.45);
+  --mermaid-gradient: linear-gradient(135deg, #00f5d4, #48dbfb);
+
+  --lavender: #a55eea;
+  --lavender-glow: rgba(165, 94, 234, 0.4);
+  --lavender-gradient: linear-gradient(135deg, #a55eea, #5f27cd);
+
+  --seashell-gold: #feca57;
+  --seashell-gold-glow: rgba(254, 202, 87, 0.4);
+  --seashell-gradient: linear-gradient(135deg, #feca57, #ff9f43);
+
+  --pearl-shimmer: linear-gradient(135deg, #ff75a0 0%, #a55eea 50%, #00f5d4 100%);
+  --pearl-shimmer-subtle: linear-gradient(135deg, rgba(255, 117, 160, 0.22), rgba(0, 245, 212, 0.22));
+
+  /* Typography Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #dcd6f7;
+  --text-muted: #9c8eb9;
+
+  /* Borders & Surfaces */
+  --border-subtle: rgba(255, 117, 160, 0.16);
+  --border-bright: rgba(0, 245, 212, 0.32);
+  --border-iridescent: linear-gradient(135deg, rgba(255, 117, 160, 0.4), rgba(0, 245, 212, 0.4));
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Safe Area Insets for iOS PWA */
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+
+  /* Typography */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Reset & Base Rules */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ==========================================================================
+   Full Background Artwork & Atmospheric Layers
+   ========================================================================== */
+.bg-image-layer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 0;
+  background: 
+    linear-gradient(rgba(9, 5, 22, 0.70), rgba(9, 5, 22, 0.84)),
+    url('Lil%20arielagrande.jpg') center center / cover no-repeat;
+  pointer-events: none;
+}
+
+/* Background Atmosphere: Bioluminescent Floating Ambient Glow */
+body::before {
+  content: '';
+  position: fixed;
+  top: -15vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130vw;
+  height: 70vh;
+  background: radial-gradient(circle at 25% 25%, rgba(0, 245, 212, 0.18), transparent 48%),
+              radial-gradient(circle at 75% 30%, rgba(255, 117, 160, 0.20), transparent 50%),
+              radial-gradient(circle at 50% 65%, rgba(165, 94, 234, 0.16), transparent 55%),
+              radial-gradient(circle at 60% 85%, rgba(254, 202, 87, 0.10), transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+  animation: ocean-sway 18s ease-in-out infinite alternate;
+}
+
+@keyframes ocean-sway {
+  0% { transform: translateX(-50%) translateY(0) scale(1); }
+  50% { transform: translateX(-48%) translateY(15px) scale(1.05); }
+  100% { transform: translateX(-52%) translateY(-10px) scale(0.98); }
+}
+
+/* Floating Ambient Bubbles Effect */
+.bubbles-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.8), rgba(0, 245, 212, 0.25) 60%, rgba(255, 117, 160, 0.15));
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 10px rgba(0, 245, 212, 0.25);
+  animation: float-bubble 14s infinite linear;
+}
+
+.bubble:nth-child(1) { left: 12%; width: 14px; height: 14px; animation-duration: 12s; animation-delay: 0s; }
+.bubble:nth-child(2) { left: 28%; width: 22px; height: 22px; animation-duration: 16s; animation-delay: 2s; }
+.bubble:nth-child(3) { left: 45%; width: 10px; height: 10px; animation-duration: 10s; animation-delay: 5s; }
+.bubble:nth-child(4) { left: 68%; width: 18px; height: 18px; animation-duration: 15s; animation-delay: 1s; }
+.bubble:nth-child(5) { left: 85%; width: 26px; height: 26px; animation-duration: 18s; animation-delay: 4s; }
+.bubble:nth-child(6) { left: 92%; width: 12px; height: 12px; animation-duration: 11s; animation-delay: 7s; }
+
+@keyframes float-bubble {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.65;
+  }
+  85% {
+    opacity: 0.65;
+  }
+  100% {
+    transform: translateY(-115vh) translateX(25px);
+    opacity: 0;
+  }
+}
+
+/* App Container Wrapper */
+.app-container {
+  position: relative;
+  z-index: 2;
+  max-width: 540px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--sat) + 12px) 16px calc(var(--sab) + 94px);
+}
+
+/* ==========================================================================
+   Header Component: Disney Mermaid & Hello Kitty Branding
+   ========================================================================== */
+.app-header {
+  padding: 8px 0 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 16px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logo-icon-sparkle {
+  font-size: 1.15rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px var(--kitty-pink));
+}
+
+.logo-jewel {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.logo-jewel.ruby { background-color: var(--kitty-pink); color: var(--kitty-pink-glow); }
+.logo-jewel.sapphire { background-color: var(--mermaid-aqua); color: var(--mermaid-aqua-glow); }
+.logo-jewel.emerald { background-color: var(--seashell-gold); color: var(--seashell-gold-glow); }
+
+.app-title {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 10%, #ffd6e0 45%, #80ffea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(255, 117, 160, 0.25);
+}
+
+.badge-era {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 4px 11px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 117, 160, 0.12);
+  border: 1px solid rgba(255, 117, 160, 0.35);
+  color: var(--kitty-pink-light);
+  box-shadow: 0 0 10px rgba(255, 117, 160, 0.2);
+}
+
+/* ==========================================================================
+   Search & Quick Find Component
+   ========================================================================== */
+.search-section {
+  margin-bottom: 14px;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--bg-card);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 0 16px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.search-input-wrapper:focus-within {
+  border-color: var(--mermaid-aqua);
+  box-shadow: 0 0 18px var(--mermaid-aqua-glow), inset 0 0 8px rgba(0, 245, 212, 0.1);
+}
+
+.search-icon {
+  width: 17px;
+  height: 17px;
+  color: var(--mermaid-aqua);
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  padding: 11px 0;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.btn-clear {
+  background: none;
+  border: none;
+  color: var(--kitty-pink);
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.btn-clear:hover {
+  color: #ffffff;
+  transform: scale(1.15);
+}
+
+.btn-clear.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   One-Tap Vibe Presets: Girly Pop & Mermaid Shortcuts
+   ========================================================================== */
+.presets-section {
+  margin-bottom: 14px;
+}
+
+.presets-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.section-micro-label {
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--kitty-pink-light);
+  text-transform: uppercase;
+}
+
+.btn-reset-text {
+  background: none;
+  border: none;
+  color: var(--mermaid-aqua);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.btn-reset-text:hover {
+  opacity: 0.8;
+}
+
+.presets-scroll {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.presets-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.preset-pill {
+  white-space: nowrap;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.preset-pill:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--kitty-pink);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.preset-pill.active {
+  background: linear-gradient(135deg, rgba(255, 117, 160, 0.35), rgba(0, 245, 212, 0.35));
+  border-color: var(--kitty-pink);
+  color: #ffffff;
+  box-shadow: 0 0 16px var(--kitty-pink-glow), 0 0 10px var(--mermaid-aqua-glow);
+}
+
+/* ==========================================================================
+   Ribbon Filters: Era & BPM
+   ========================================================================== */
+.ribbon-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(22, 15, 48, 0.55);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ribbon-label {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--kitty-pink-light);
+  min-width: 36px;
+  text-transform: uppercase;
+}
+
+.pill-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pill-group::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.filter-chip:hover {
+  color: #ffffff;
+  border-color: var(--mermaid-aqua);
+}
+
+.filter-chip.active {
+  background: var(--mermaid-gradient);
+  border-color: var(--mermaid-aqua);
+  color: #090516;
+  font-weight: 700;
+  box-shadow: 0 0 12px var(--mermaid-aqua-glow);
+}
+
+/* ==========================================================================
+   Control Panel & Vibe Sliders (Pink, Aqua, Lavender)
+   ========================================================================== */
+.control-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 117, 160, 0.08);
+  margin-bottom: 24px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.slider-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+.jewel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Hello Kitty Pink dot */
+.jewel-dot.ruby { background: var(--kitty-pink); box-shadow: 0 0 12px var(--kitty-pink); }
+/* Ariel Seafoam Aqua dot */
+.jewel-dot.sapphire { background: var(--mermaid-aqua); box-shadow: 0 0 12px var(--mermaid-aqua); }
+/* Sunken Treasure Gold dot */
+.jewel-dot.emerald { background: var(--seashell-gold); box-shadow: 0 0 12px var(--seashell-gold); }
+
+.slider-value {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Range Sliders */
+.vibe-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-full);
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  touch-action: pan-x;
+  transition: background 0.2s ease;
+}
+
+/* Pearl & Shell Glowing Thumbs */
+.vibe-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border: 2.5px solid #ffffff;
+}
+
+.ruby-slider::-webkit-slider-thumb {
+  border-color: var(--kitty-pink);
+  box-shadow: 0 0 14px var(--kitty-pink), 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.sapphire-slider::-webkit-slider-thumb {
+  border-color: var(--mermaid-aqua);
+  box-shadow: 0 0 14px var(--mermaid-aqua), 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.emerald-slider::-webkit-slider-thumb {
+  border-color: var(--seashell-gold);
+  box-shadow: 0 0 14px var(--seashell-gold), 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.vibe-slider:active::-webkit-slider-thumb {
+  transform: scale(1.22);
+}
+
+/* ==========================================================================
+   Track Feed & Song Cards
+   ========================================================================== */
+.feed-section {
+  flex: 1;
+}
+
+.feed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+
+.feed-title {
+  font-family: var(--font-heading);
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.match-count {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--kitty-pink-light);
+}
+
+.track-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Song Card */
+.song-card {
+  position: relative;
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.28s ease,
+              border-color 0.25s ease,
+              background-color 0.25s ease,
+              box-shadow 0.25s ease;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.song-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--kitty-pink);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(255, 117, 160, 0.2);
+}
+
+.song-card:active {
+  transform: scale(0.985);
+}
+
+/* Active Playing State: Mermaid Seafoam & Hello Kitty Glow */
+.song-card.is-active {
+  background: var(--bg-card-active);
+  border-color: var(--mermaid-aqua);
+  box-shadow: 0 0 24px rgba(0, 245, 212, 0.3), inset 0 0 14px rgba(255, 117, 160, 0.12);
+}
+
+.song-card.is-active .card-title {
+  color: #ffffff;
+}
+
+.song-card.is-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--kitty-pink), var(--mermaid-aqua));
+}
+
+/* Song Card Main Content */
+.card-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+
+.card-artist {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Attribute Badges */
+.card-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.attr-pill {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+}
+
+.attr-pill.ruby { border-color: rgba(255, 117, 160, 0.4); color: var(--kitty-pink-light); }
+.attr-pill.sapphire { border-color: rgba(0, 245, 212, 0.4); color: var(--mermaid-aqua-light); }
+.attr-pill.emerald { border-color: rgba(254, 202, 87, 0.4); color: #ffeaa7; }
+
+/* Card Actions Container */
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Card Favorite Heart Button */
+.btn-card-fav {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 117, 160, 0.28);
+  background: rgba(255, 117, 160, 0.08);
+  color: var(--kitty-pink-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-card-fav svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), fill 0.2s ease, stroke 0.2s ease;
+}
+
+.btn-card-fav:hover {
+  background: rgba(255, 117, 160, 0.22);
+  border-color: var(--kitty-pink);
+  transform: scale(1.12);
+  box-shadow: 0 0 12px var(--kitty-pink-glow);
+  color: #ffffff;
+}
+
+.btn-card-fav.is-fav {
+  background: rgba(255, 117, 160, 0.28);
+  border-color: var(--kitty-pink);
+  color: var(--kitty-pink);
+  box-shadow: 0 0 12px var(--kitty-pink-glow);
+}
+
+.btn-card-fav.is-fav svg {
+  fill: var(--kitty-pink);
+  stroke: var(--kitty-pink);
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 6px var(--kitty-pink));
+}
+
+.badge-count {
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  background: var(--kitty-pink);
+  color: #090516;
+  font-weight: 800;
+  margin-left: 3px;
+}
+
+/* Wikipedia "Learn More" Link Button */
+.wiki-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 11px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 245, 212, 0.06);
+  border: 1px solid rgba(0, 245, 212, 0.28);
+  color: var(--mermaid-aqua-light);
+  font-family: var(--font-heading);
+  font-size: 0.73rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.wiki-btn .wiki-icon {
+  width: 10px;
+  height: 10px;
+  color: var(--mermaid-aqua);
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.wiki-btn:hover {
+  background: rgba(0, 245, 212, 0.16);
+  border-color: var(--mermaid-aqua);
+  color: #ffffff;
+  box-shadow: 0 0 12px var(--mermaid-aqua-glow);
+  transform: translateY(-1px);
+}
+
+.wiki-btn:hover .wiki-icon {
+  transform: translate(1px, -1px);
+  color: #ffffff;
+}
+
+.wiki-btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+/* Card Play Button */
+.btn-card-play {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-card-play svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+  margin-left: 2px;
+}
+
+.song-card.is-active .btn-card-play {
+  background: var(--pearl-shimmer);
+  color: #ffffff;
+  box-shadow: 0 0 16px var(--kitty-pink-glow), 0 0 10px var(--mermaid-aqua-glow);
+}
+
+.song-card.is-active.is-playing .btn-card-play svg {
+  margin-left: 0;
+}
+
+.song-card:hover .btn-card-play {
+  transform: scale(1.08);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Empty State */
+.empty-feed {
+  background: var(--bg-card);
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 36px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 2.2rem;
+  opacity: 0.8;
+}
+
+.empty-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--kitty-pink-light);
+}
+
+.empty-desc {
+  font-size: 0.84rem;
+  max-width: 290px;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Persistent Bottom Player (Mermaid Lagoon Bar)
+   ========================================================================== */
+.persistent-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  background: var(--bg-glass);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-top: 1px solid var(--border-bright);
+  padding: 8px 16px calc(var(--sab) + 10px);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.7), 0 -2px 14px rgba(0, 245, 212, 0.15);
+}
+
+@media (min-width: 541px) {
+  .persistent-player {
+    max-width: 540px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    border-left: 1px solid var(--border-subtle);
+    border-right: 1px solid var(--border-subtle);
+  }
+}
+
+/* Audio Scrubber & Timeline */
+.player-timeline {
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 2px 0;
+}
+
+.timeline-bar {
+  position: relative;
+  width: 100%;
+  height: 5px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.12);
+  transition: height 0.15s ease;
+}
+
+.player-timeline:hover .timeline-bar {
+  height: 7px;
+}
+
+.timeline-progress {
+  height: 100%;
+  width: 0%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--kitty-pink), var(--mermaid-aqua));
+  box-shadow: 0 0 10px var(--mermaid-aqua-glow);
+  pointer-events: none;
+  transition: width 0.1s linear;
+}
+
+.timeline-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--mermaid-aqua);
+  box-shadow: 0 0 10px var(--mermaid-aqua-glow);
+  pointer-events: none;
+  transition: transform 0.15s ease;
+}
+
+.player-timeline:hover .timeline-thumb {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.timeline-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3px;
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.player-main-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.player-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+
+.track-artwork-mini {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, #24164b, #090516);
+  border: 1px solid var(--border-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 12px rgba(0, 245, 212, 0.2);
+}
+
+/* Equalizer Bars: Bouncing Bubble Pearls */
+.equalizer-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 20px;
+}
+
+.equalizer-bars i {
+  display: block;
+  width: 3.5px;
+  height: 6px;
+  background: var(--mermaid-aqua);
+  border-radius: var(--radius-full);
+  transition: height 0.2s ease;
+}
+
+.persistent-player.is-playing .equalizer-bars i:nth-child(1) {
+  animation: bubble-bounce 0.8s infinite ease-in-out alternate;
+  background: var(--kitty-pink);
+  box-shadow: 0 0 6px var(--kitty-pink);
+}
+.persistent-player.is-playing .equalizer-bars i:nth-child(2) {
+  animation: bubble-bounce 0.6s infinite ease-in-out alternate 0.15s;
+  background: var(--mermaid-aqua);
+  box-shadow: 0 0 6px var(--mermaid-aqua);
+}
+.persistent-player.is-playing .equalizer-bars i:nth-child(3) {
+  animation: bubble-bounce 0.9s infinite ease-in-out alternate 0.3s;
+  background: var(--seashell-gold);
+  box-shadow: 0 0 6px var(--seashell-gold);
+}
+.persistent-player.is-playing .equalizer-bars i:nth-child(4) {
+  animation: bubble-bounce 0.7s infinite ease-in-out alternate 0.2s;
+  background: var(--kitty-pink);
+  box-shadow: 0 0 6px var(--kitty-pink);
+}
+
+@keyframes bubble-bounce {
+  0% { height: 5px; }
+  100% { height: 20px; }
+}
+
+.track-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.persistent-player .track-title {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.persistent-player .track-artist {
+  font-size: 0.77rem;
+  color: var(--kitty-pink-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.btn-player-action {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-player-action:active {
+  transform: scale(0.92);
+}
+
+/* Vibe Roulette / Shuffle Button */
+.btn-shuffle {
+  width: 38px;
+  height: 38px;
+  color: var(--mermaid-aqua);
+}
+
+.btn-shuffle:hover {
+  background: rgba(0, 245, 212, 0.18);
+  color: #ffffff;
+  box-shadow: 0 0 12px var(--mermaid-aqua-glow);
+}
+
+.btn-shuffle:active svg {
+  transform: rotate(180deg);
+  transition: transform 0.25s ease;
+}
+
+/* Play / Pause Primary Button */
+.btn-play {
+  width: 44px;
+  height: 44px;
+  background: var(--pearl-shimmer);
+  color: #ffffff;
+  box-shadow: 0 0 20px var(--kitty-pink-glow), 0 0 14px var(--mermaid-aqua-glow);
+  border: none;
+}
+
+.btn-play svg {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-play:hover {
+  transform: scale(1.06);
+}
+
+/* Previous Track Button */
+.btn-prev {
+  width: 38px;
+  height: 38px;
+  color: var(--text-secondary);
+}
+
+.btn-prev:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.btn-prev svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* Next Track Button */
+.btn-next {
+  width: 38px;
+  height: 38px;
+}
+
+.btn-next:hover {
+  background: rgba(255, 117, 160, 0.18);
+  color: var(--kitty-pink-light);
+  box-shadow: 0 0 12px var(--kitty-pink-glow);
+}
+
+.btn-next svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* Volume / Mute Button */
+.btn-volume {
+  width: 38px;
+  height: 38px;
+  color: var(--mermaid-aqua);
+}
+
+.btn-volume:hover {
+  background: rgba(0, 245, 212, 0.18);
+  color: #ffffff;
+  box-shadow: 0 0 12px var(--mermaid-aqua-glow);
+}
+
+.btn-volume.is-muted {
+  color: var(--kitty-pink);
+  background: rgba(255, 117, 160, 0.18);
+  box-shadow: 0 0 10px var(--kitty-pink-glow);
+}
+
+.btn-volume svg {
+  width: 17px;
+  height: 17px;
+}
+
+.control-icon.hidden {
+  display: none !important;
+}
+
+/* Beat Pulse Visualizer Glow Synced to Active Song BPM */
+@keyframes bpm-pulse {
+  0% {
+    opacity: 0.65;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.3) drop-shadow(0 0 24px rgba(0, 245, 212, 0.45));
+  }
+  100% {
+    opacity: 0.65;
+    filter: brightness(1);
+  }
+}
+
+body.is-playing::before {
+  animation: ocean-sway 18s ease-in-out infinite alternate,
+             bpm-pulse var(--bpm-pulse-duration, 0.5s) ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Start Audio Unlock Overlay (First Click Rule) - Mermaid Princess Theme
+   ========================================================================== */
+.start-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.start-overlay.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 5, 22, 0.95);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+}
+
+.overlay-card {
+  position: relative;
+  z-index: 2;
+  max-width: 360px;
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius-lg);
+  padding: 34px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 35px var(--kitty-pink-glow), 0 0 25px var(--mermaid-aqua-glow);
+}
+
+.overlay-icon-ring {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 117, 160, 0.28), rgba(0, 245, 212, 0.28));
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 0 28px var(--kitty-pink-glow);
+}
+
+.pulse-icon {
+  width: 30px;
+  height: 30px;
+  color: #ffffff;
+  margin-left: 3px;
+}
+
+.overlay-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 20%, #ffd6e0 60%, #80ffea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.overlay-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin-bottom: 24px;
+}
+
+.btn-start {
+  width: 100%;
+  height: 52px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: var(--pearl-shimmer);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 24px var(--kitty-pink-glow), 0 0 16px var(--mermaid-aqua-glow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-start:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px var(--kitty-pink-glow), 0 0 22px var(--mermaid-aqua-glow);
+}
+
+.btn-start:active {
+  transform: translateY(1px);
+}
+
+.btn-arrow {
+  width: 18px;
+  height: 18px;
+}
+
+.overlay-tip {
+  margin-top: 18px;
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+/* ==========================================================================
+   Hidden YouTube Host
+   ========================================================================== */
+.youtube-audio-host {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0.01;
+  pointer-events: none;
+  overflow: hidden;
+}
